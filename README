@@ -1,5 +1,5 @@
 betaSetup simulation.
-This program was written to simulate a beta setup similar to the one at the SSD CERN group.
+This program was written to simulate in Geant4 a beta setup similar to the one at the SSD CERN group.
 The main aim was to understand whether a hybrid pixel detector could be used to determine the impact position on one of the other silicon planes.
 The trigger scintillator is not part of the simulation.
 
