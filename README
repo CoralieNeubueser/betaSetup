@@ -1,0 +1,122 @@
+betaSetup simulation.
+This program was written to simulate a beta setup similar to the one at the SSD CERN group.
+The main aim was to understand whether a hybrid pixel detector could be used to determine the impact position on one of the other silicon planes.
+The trigger scintillator is not part of the simulation.
+
+
+GEOMETRY DEFINITION
+
+All components of the simulated setup are placed in a cubic world filled with air.
+The side of the world is calculated when the geometry is initialized, in order to accommodate the setup.
+
+The geometry contains a model of the 90Sr source case in use at CERN.
+In the model, the 90Sr atoms occupy a 2 mm diameter sphere contained in a steel plug.
+The steel plug is embedded in a plexiglass cylinder.
+Both the plug and the cylinder have a 2 mm diameter hole to allow for the beta particles to exit the case.
+The opening is aligned with the z axis of the simulation and the beta particles exit the source case in the direction of increasing z.
+
+Following the z axis, an absorber is placed on the particles path to modify their spectrum.
+The absorber is a cylinder with the same diameter as the source case.
+The thickness and material of the absorber can be modified through a messenger class (see run.mac).
+
+After the absorber, the particles meet a brass collimator.
+The collimator is a cylinder with a hole centered on the z axis.
+The collimator diameter is the same as the source case.
+The thickness and hole diameter can be modified through a messenger class (see run.mac).
+
+After the collimator, 3 planes containing the silicon detectors are present.
+
+The silicon detectors are placed on PCBs.
+Material of the PCB substrate has the density specified in the datasheet for Rogers materials RO4350B,
+that is used in the SSD group.
+The material is composed in the simulation by bakelite and glass, in the proportions necessary to give the right thickness.
+Each side of the PCB has a copper layer.
+The PCB substrate thickness, copper layer thickness, and PCB side dimension can be modified through a messenger class (see run.mac).
+The PCB parameteres are the same for each plane.
+The side of the PCBs is at least as large as the largest silicon detector side.
+A hole in the PCBs might be implemented at a later stage.
+
+The thickness and side of each silicon detector can be adjusted for each plane through a messenger class (see run.mac).
+The distance between the silicon top surface and the object preceding it on the z axis (collimator or PCB) can be set for each plane.
+The step size in each silicon volume is limited to 1 um.
+
+The collimator, absorber, and PCBs can be removed from the simulation by setting the appropriate thicknesses to 0.
+
+
+SCORING
+
+The scoring is done using sensitive detectors.
+The silicon volumes are associated to these sensitive detectors.
+Each sensitive detector has two hits collections.
+One is used to calculate the total energy deposit and its position for each event.
+The other is used to produce the electron (and positron) and gamma spectra at each plane.
+Each sensitive detector produces a root tree with an entry for each event.
+The trees need to be ordered and befriended for the analysis.
+TTree::BuildIndex(...), TTree::AddFriend(...)
+NOTE: each tree contains only one branch. To access the leaves containing the relevant information the methods:
+TTree::FindLeaf(...) and TLeaf::SetAddress(...) should be used instead of the TTree::SetBranchAddress(...) method (or at least, i could not make the latter work).
+
+
+PHYSICS LISTS
+
+The physics lists contain the Penelope library and add the PAI model to the whole world.
+The PAI model could be restricted to the silicon volumes, but till now this has not been possible.
+
+The cuts for the EM processes are set to 1 um (the G4 default is 1 mm).
+This seems to affect the shape of the energy loss distribution in the silicon volumes due to charged particles.
+Other effects of this cut are increased running time and enhancement of the amount of x-rays that hit the detectors.
+
+The low edge of the production cuts table was lowered to 250 eV (default 990 eV).
+This further increased the running time and the amount of x-rays but did not change the energy loss distribution for charged particles (on 200 um Si).
+This parameter was in the end left to its default value.
+The code to lower the edge is still present (commented) in the SetCuts method.
+
+The settings for the radioactive decay are taken from the rdecay01 example.
+
+
+PRIMARY GENERATION
+
+The particles are generated using a particle gun.
+The particles are placed randomly in a 2 mm diameter sphere whose position is calculated in the DetectorConstruction class.
+The momentum direction is set parallel to the z axis, in case high energy particles are substituted to the 90Sr ions to test the expected energy loss distribution.
+
+Currently 90Sr ions are placed at rest in the right place and left to decay.
+The great majority of electrons do not excape the source case, rendering the simulation quite inefficient and the output files large and mostly consisting of default values.
+A possible improvement could be to produce a different simulation where only the source with its case is present,
+extract the particle spectra (energy and momentum directions) at the exit hole of the source and use these as input to this program.
+In this way only particles that left the source case would be simulated.
+
+
+GEANT VERSION AND OPTIONS
+
+The program was developed using Geant4 version 10.05 on a Ubuntu machine.
+The installation was compiled using the cmake options
+-DGEANT4_INSTALL_DATA=ON -DGEANT4_USE_OPENGL_X11=ON -DGEANT4_USE_RAYTRACER_X11=ON -DGEANT4_BUILD_MULTITHREADED=ON -DGEANT4_USE_GDML=ON -DGEANT4_USE_QT=ON -DCMAKE_INSTALL_PREFIX=...
+Use the absolute path for the last option.
+
+
+COMPILATION
+
+In order to use and compile the program, the environment has to be set for Geant4.
+This is done by sourcing the appropriate script:
+.../geantInstallDir/bin/geant4.sh
+or similar.
+
+The compilation of this program is done using cmake.
+Create a build folder (usually outside the source folder).
+Move into the build folder then create the make files using
+cmake -DGeant4_DIR=AbsolutePathToGeantInstallation pathToSourceFolder
+Then use make.
+Note that the script files (.mac) may be overwritten in the build folder when make is issued.
+Modify them in the source folder, or create new ones.
+
+
+EXECUTION
+
+In order to use and compile the program, the environment has to be set for Geant4.
+This is done by sourcing the appropriate script:
+.../geantInstallDir/bin/geant4.sh
+or similar.
+
+If the program is execute without arguments, and the G4 installation allows for it, a graphic interface should appear showing the geometry.
+Batch execution can be started by giving the program a file (e.g. run.mac) as an argument.

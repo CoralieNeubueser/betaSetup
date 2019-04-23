@@ -1,0 +1,102 @@
+#
+# Macro file for "AnaEx01.cc"
+# 
+# can be run in batch, without graphic
+# or interactively: Idle> /control/execute run.mac
+#
+/control/verbose 2
+/run/verbose 2
+/event/verbose 0
+/tracking/verbose 0
+#
+# ======================================== set geometry stuff
+#
+# silicon detector thickness and side
+# both these dimensions can not be 0
+# plane 0
+/beta/det/siThick0 200 um
+/beta/det/siSide0 1 cm
+# plane 1
+/beta/det/siThick1 200 um
+/beta/det/siSide1 1 cm
+# plane 2
+/beta/det/siThick2 200 um
+/beta/det/siSide2 2 cm
+#
+# distance between silicon top surface and previous plane (or collimator)
+# plane 0
+/beta/det/planeDist0 1 cm
+# plane 1
+/beta/det/planeDist1 1 cm
+# plane 2
+/beta/det/planeDist2 1 cm
+#
+# collimator thickness and hole diameter, the collimator is made of brass
+# 0 thickness removes it from the simulation
+/beta/det/collThick 0 mm
+/beta/det/collHoleDiam 2 mm
+#
+# absorber thickness and material
+# 0 thickness removes it from the simulation
+/beta/det/absThick 1 mm
+/beta/det/absMat G4_POLYETHYLENE
+#
+# pcb substrate thickness, metal thickness, and side
+# these values are the same for all planes
+# the pcb substrate material is a mixture of glass and bakelite,
+# its density is the same as the datasheet for the material used in the lab
+# the metal is present on both sides of the pcb with the thickness specified in this file
+# the pcb side is set to the program to be at least as big as the biggest si sensor
+# 0 thickness for the substrate or the metal remove the pcbs from the simulation
+/beta/det/pcbSubThick 0.8 mm 
+/beta/det/pcbMetalThick 35 um
+/beta/det/pcbSide 2.5 cm 
+#
+# Reinitialize the geometry to make the changes effective (actually not needed here since /run/initialize is below...)
+/beta/det/Reinitialize
+#
+# ===================================== end of geometry
+#
+# initialize
+/run/initialize
+#
+# set output file name
+# /beta/histo/outFileName betaSimulation_noCollimator
+# # put 90Sr as source
+# /gun/particle ion
+# /gun/ion 38 90
+# /gun/energy 0. GeV
+# /run/printProgress 500000
+# /run/beamOn 50000000
+#
+# # muons can be used to see the MIP signal on sensors
+# /beta/histo/outFileName /home/vigna/data/betaSimulationTests/betaSimulationMuonRun
+# /gun/particle mu-
+# /gun/energy 100 GeV
+# /run/printProgress 10000
+# /run/beamOn 100000
+
+
+/beta/det/collThick 1 cm
+/beta/det/collHoleDiam 1 mm
+/beta/det/pcbSubThick 0 mm
+/beta/det/Reinitialize
+
+/beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_1cmCollimator_1mmHole_noPCBs
+# put 90Sr as source
+/gun/particle ion
+/gun/ion 38 90
+/gun/energy 0. GeV
+/run/printProgress 500000
+/run/beamOn 200000000
+
+# /beta/det/pcbSubThick 0 mm
+# /beta/det/Reinitialize
+
+# /beta/histo/outFileName betaSimulation_1cmCollimator_noPCBs_5mmDist2
+# # put 90Sr as source
+# /gun/particle ion
+# /gun/ion 38 90
+# /gun/energy 0. GeV
+# /run/printProgress 500000
+# /run/beamOn 150000000
