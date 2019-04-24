@@ -92,8 +92,21 @@ G4bool SiDetSD::ProcessHits(G4Step* aStep, G4TouchableHistory*)
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void SiDetSD::EndOfEvent(G4HCofThisEvent*)
+void SiDetSD::EndOfEvent(G4HCofThisEvent* hce)
 {
+  // check that at least one hit collection has some entries in this event
+  // the loop looks into all hit collections
+  G4int cap = hce->GetCapacity(); // number of "reserved places" in the hit collection vector, can contain a HC or not
+  G4bool processEvt = false;
+  for(G4int i = 0; i < cap; ++i){
+    if(hce->GetHC(i)) // can return null
+      if(hce->GetHC(i)->GetSize() > 0) // if there are entries in at least one HC, process evt (GetSize is used here as entries() does not belong to the base class)
+	processEvt = true;
+  }
+
+  if(processEvt == false)
+    return;
+  
   G4AnalysisManager* analysisManager = G4AnalysisManager::Instance(); 
 
   G4double edep;
