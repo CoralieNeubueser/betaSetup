@@ -82,13 +82,21 @@
 /beta/det/pcbSubThick 0 mm
 /beta/det/Reinitialize
 
-/beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_1cmCollimator_1mmHole_noPCBs
+# /beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_1cmCollimator_1mmHole_noPCBs
+# # put 90Sr as source
+# /gun/particle ion
+# /gun/ion 38 90
+# /gun/energy 0. GeV
+# /run/printProgress 500000
+# /run/beamOn 200000000
+
+/beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_testNorm
 # put 90Sr as source
 /gun/particle ion
 /gun/ion 38 90
 /gun/energy 0. GeV
 /run/printProgress 500000
-/run/beamOn 200000000
+/run/beamOn 1000000
 
 # /beta/det/pcbSubThick 0 mm
 # /beta/det/Reinitialize
