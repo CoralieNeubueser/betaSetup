@@ -60,11 +60,13 @@ TTree::FindLeaf(...) and TLeaf::SetAddress(...) should be used instead of the TT
 PHYSICS LISTS
 
 The physics lists contain the Penelope library and add the PAI model to the whole world.
-The PAI model could be restricted to the silicon volumes, but till now this has not been possible.
+The PAI model could be restricted to the silicon volumes.
+This was tested, and declaring the PAI in the whole world, without a dedicated region for the silicon, result in more stable running when multiple runs are specified in the run.mac.
+The code for the region is left, commented, in the files DetectorConstruction.hh DetectorConstruction.cc PhysicLists.cc.
 
-The cuts for the EM processes are set to 1 um (the G4 default is 1 mm).
-This seems to affect the shape of the energy loss distribution in the silicon volumes due to charged particles.
-Other effects of this cut are increased running time and enhancement of the amount of x-rays that hit the detectors.
+The cuts for the EM processes are set to 1 mm (the G4 default).
+Reducing this to 1 um did not result in differences in che energy deposit distributions for high energy muons.
+Effects of reducing this cut are increased running time and enhancement of the amount of x-rays that hit the detectors.
 
 The low edge of the production cuts table was lowered to 250 eV (default 990 eV).
 This further increased the running time and the amount of x-rays but did not change the energy loss distribution for charged particles (on 200 um Si).

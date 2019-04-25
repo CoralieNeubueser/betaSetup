@@ -38,7 +38,7 @@
 #
 # absorber thickness and material
 # 0 thickness removes it from the simulation
-/beta/det/absThick 1 mm
+/beta/det/absThick 0 mm
 /beta/det/absMat G4_POLYETHYLENE
 #
 # pcb substrate thickness, metal thickness, and side
@@ -61,50 +61,59 @@
 /run/initialize
 #
 # set output file name
-# /beta/histo/outFileName betaSimulation_noCollimator
-# # put 90Sr as source
-# /gun/particle ion
-# /gun/ion 38 90
-# /gun/energy 0. GeV
-# /run/printProgress 500000
-# /run/beamOn 50000000
+/beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_noCollimator_noAbsorber
+# put 90Sr as source
+/gun/particle ion
+/gun/ion 38 90
+/gun/energy 0. GeV
+/run/printProgress 500000
+/run/beamOn 100000000
 #
-# # muons can be used to see the MIP signal on sensors
-# /beta/histo/outFileName /home/vigna/data/betaSimulationTests/betaSimulationMuonRun
+# muons can be used to see the MIP signal on sensors
+# /beta/histo/outFileName /home/vigna/data/betaSimulationTests/betaSimulationMuonRun_testProdCut1mm_siPai
 # /gun/particle mu-
 # /gun/energy 100 GeV
 # /run/printProgress 10000
 # /run/beamOn 100000
 
 
-/beta/det/collThick 1 cm
-/beta/det/collHoleDiam 1 mm
-/beta/det/pcbSubThick 0 mm
-/beta/det/Reinitialize
+# =============================== produce data for comparison with bichsel theory ==============================
+# use this to validate the choiches in physics lists, cuts, pai, etc...
 
-# /beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_1cmCollimator_1mmHole_noPCBs
-# # put 90Sr as source
-# /gun/particle ion
-# /gun/ion 38 90
-# /gun/energy 0. GeV
-# /run/printProgress 500000
-# /run/beamOn 200000000
-
-/beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_testNorm
-# put 90Sr as source
-/gun/particle ion
-/gun/ion 38 90
-/gun/energy 0. GeV
-/run/printProgress 500000
-/run/beamOn 1000000
-
+# /beta/det/absThick 0 mm
+# /beta/det/collThick 0 mm
 # /beta/det/pcbSubThick 0 mm
-# /beta/det/Reinitialize
 
-# /beta/histo/outFileName betaSimulation_1cmCollimator_noPCBs_5mmDist2
-# # put 90Sr as source
-# /gun/particle ion
-# /gun/ion 38 90
-# /gun/energy 0. GeV
-# /run/printProgress 500000
-# /run/beamOn 150000000
+# /gun/particle mu-
+# /gun/energy 100 GeV
+# /run/printProgress 10000
+
+# /beta/det/siThick0 10 um
+# /beta/det/Reinitialize
+# /beta/histo/outFileName /home/vigna/data/thiknessStudyBeta/10um
+# /run/beamOn 100000
+
+# /beta/det/siThick0 20 um
+# /beta/det/Reinitialize
+# /beta/histo/outFileName /home/vigna/data/thiknessStudyBeta/20um
+# /run/beamOn 100000
+
+# /beta/det/siThick0 40 um
+# /beta/det/Reinitialize
+# /beta/histo/outFileName /home/vigna/data/thiknessStudyBeta/40um
+# /run/beamOn 100000
+
+# /beta/det/siThick0 80 um
+# /beta/det/Reinitialize
+# /beta/histo/outFileName /home/vigna/data/thiknessStudyBeta/80um
+# /run/beamOn 100000
+
+# /beta/det/siThick0 160 um
+# /beta/det/Reinitialize
+# /beta/histo/outFileName /home/vigna/data/thiknessStudyBeta/160um
+# /run/beamOn 100000
+
+# /beta/det/siThick0 320 um
+# /beta/det/Reinitialize
+# /beta/histo/outFileName /home/vigna/data/thiknessStudyBeta/320um
+# /run/beamOn 100000

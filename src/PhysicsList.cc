@@ -27,6 +27,9 @@
 #include "G4DeexPrecoParameters.hh"
 #include "G4NuclideTable.hh"
 
+#include "G4Region.hh"
+#include "G4RegionStore.hh"
+
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 PhysicsList::PhysicsList() 
@@ -35,7 +38,10 @@ PhysicsList::PhysicsList()
   // SetVerboseLevel(1);
 
   // set cuts for EM processes (gamma, e-, e+, proton)
-  defaultCutValue = 1 * um;
+  defaultCutValue = 1 * mm;
+  // 1 mm is the G4 default, setting to 1 um does not make a difference for high energy muons
+  // 1 um results in more gammas produced when the source is running
+  // with the source a difference was seen for the energy deposit distribution, probably due to the gammas
   
   // Default physics
   RegisterPhysics(new G4DecayPhysics());
@@ -44,7 +50,8 @@ PhysicsList::PhysicsList()
   RegisterPhysics(new G4EmPenelopePhysics());
   
   // add PAI model
-  G4EmParameters::Instance()->AddPAIModel("all","World","pai");
+  G4EmParameters::Instance()->AddPAIModel("all","World","pai"); // if SiliconRegion is defined, enabling PAI in the world volume causes problems in the deposited energy distribution
+  //G4EmParameters::Instance()->AddPAIModel("all","SiliconRegion","pai");
   
   // // enabling this does not seem to have an effect on Edep distribution
   // G4EmParameters::Instance()->AddPAIModel("all","World","pai_photon");
@@ -85,12 +92,18 @@ void PhysicsList::SetCuts()
 {
   //G4VUserPhysicsList::SetCuts(); // from B3
 
-  // use the cut defined in the constructor (defaultCutValue)
+  // use the cut defined in the constructor (defaultCutValue) for world
   SetCutsWithDefault();
 
   // lower the energy edge for production cuts, does not seem to affect the energy deposit in silicon from charged particles
   // fluorescence x-rays are enhanched when this is active
   //G4ProductionCutsTable::GetProductionCutsTable()->SetEnergyRange(250*eV, 1*GeV);
+
+  // // cuts for the SiliconRegion
+  // G4Region* region = G4RegionStore::GetInstance()->GetRegion("SiliconRegion");
+  // G4ProductionCuts* cuts = new G4ProductionCuts();
+  // cuts->SetProductionCut(defaultCutValue);
+  // region->SetProductionCuts(cuts);
   
   return;
 }

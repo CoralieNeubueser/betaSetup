@@ -94,6 +94,9 @@ public:
 
   // silicon logical volumes
   G4LogicalVolume** _logicSi;
+
+  // // region containing the silicon detectors, used for the PAI model
+  // G4Region* _siRegion;
   
   // functions to build and place the different volumes
   void ConstructWorld(); // constructs and places the world

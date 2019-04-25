@@ -26,6 +26,10 @@
 #include "G4SystemOfUnits.hh"
 #include "G4SDManager.hh"
 
+#include "G4Region.hh"
+#include "G4RegionStore.hh"
+#include "G4ProductionCuts.hh"
+
 #include "G4UserLimits.hh"
 
 int DetectorConstruction::nPlanes = 3; // static member for number of planes (Si+PCB)
@@ -83,6 +87,8 @@ DetectorConstruction::DetectorConstruction()
   _messenger = new DetectorMessenger(this);
 
   _logicSi = new G4LogicalVolume*[nPlanes];
+
+  // _siRegion = 0;
   
   return;
 }
@@ -101,6 +107,13 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   G4LogicalVolumeStore::GetInstance()->Clean();
   G4SolidStore::GetInstance()->Clean();
 
+  // if(_siRegion) // delete region in case it exists
+  //   delete _siRegion;
+  // // create region
+  // _siRegion = new G4Region("SiliconRegion");
+  // G4ProductionCuts* cuts = new G4ProductionCuts(); // production cuts must be set for the region
+  // _siRegion->SetProductionCuts(cuts);
+    
   // check input geometry and adjust world size to contain setup
   CheckGeometry();
   
@@ -353,6 +366,11 @@ void DetectorConstruction::ConstructSiandPCB(G4int index)
   G4UserLimits* userLimits = new G4UserLimits(1*um);
   _logicSi[index]->SetUserLimits(userLimits);
 
+
+  // add logic volume to the region
+  // _logicSi[index]->SetRegion(_siRegion);
+  // _siRegion->AddRootLogicalVolume(_logicSi[index]);
+  
   name = "si";
   name += std::to_string(index);
   name += "_PV";
