@@ -115,10 +115,24 @@ void SiDetSD::EndOfEvent(G4HCofThisEvent* hce)
   G4double y = 0;
   G4double z = 0;
   G4int eID = -1;
+
+  std::vector<G4int> trkIDvec;
+  G4int trkID = -1;
+  bool foundTrk = false;
   
   G4int nofHits = fSiDetHC->entries();
   if(nofHits > 0){
     for(G4int i= 0; i < nofHits; ++i){
+
+      trkID = (*fSiDetHC)[i]->GetTrackID();
+      foundTrk = false;
+      for(G4int itrk = 0; itrk < (G4int) trkIDvec.size(); itrk++) // check if the track is already in the vector
+	if(trkID == trkIDvec[itrk])
+	  foundTrk = true;
+      
+      if(foundTrk == false)
+	trkIDvec.push_back(trkID);
+	
       edep = (*fSiDetHC)[i]->GetEdep();
       // calculate quantities for the tree
       Etot += edep;
@@ -151,6 +165,7 @@ void SiDetSD::EndOfEvent(G4HCofThisEvent* hce)
   analysisManager->FillNtupleDColumn(_planeNum, 3, x);
   analysisManager->FillNtupleDColumn(_planeNum, 4, y);
   analysisManager->FillNtupleDColumn(_planeNum, 5, z);
+  analysisManager->FillNtupleIColumn(_planeNum, 6, trkIDvec.size());
   analysisManager->AddNtupleRow(_planeNum);  
 
   nofHits = fSpectrumHC->entries();

@@ -99,6 +99,7 @@ void HistoManager::Book()
     analysisManager->CreateNtupleDColumn("x"); // column Id = 3
     analysisManager->CreateNtupleDColumn("y"); // column Id = 4
     analysisManager->CreateNtupleDColumn("z"); // column Id = 5
+    analysisManager->CreateNtupleIColumn("nTracks"); // column Id = 6
     analysisManager->FinishNtuple();
   }
 
