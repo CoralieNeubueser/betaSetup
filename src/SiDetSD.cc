@@ -13,12 +13,15 @@
 #include "G4Event.hh"
 #include "G4RunManager.hh"
 
+#include "HistoManager.hh"
+
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 SiDetSD::SiDetSD(const G4String& name, G4int planeNumber) 
  : G4VSensitiveDetector(name),
    fSiDetHC(NULL),
-   fSpectrumHC(NULL)
+   fSpectrumHC(NULL),
+   _histManager(NULL)
 {
   _planeNum = planeNumber;
 

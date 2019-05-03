@@ -12,6 +12,7 @@
 
 class G4Step;
 class G4HCofThisEvent;
+class HistoManager;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -33,11 +34,13 @@ public:
   virtual G4bool ProcessHits(G4Step* step, G4TouchableHistory* history);
   virtual void   EndOfEvent(G4HCofThisEvent* hitCollection);
 
+  void SetHistoManager(HistoManager* hm) {_histManager = hm;};
+  
 private:
   SiDetHitsCollection* fSiDetHC;
   SpectrumHitsCollection* fSpectrumHC;
   G4int _planeNum; // plane number to identify detector for histogramming 
-  
+  HistoManager* _histManager;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
