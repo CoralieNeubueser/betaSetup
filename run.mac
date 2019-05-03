@@ -60,14 +60,105 @@
 # initialize
 /run/initialize
 #
-# set output file name
-/beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_noCollimator_noAbsorber_nTrack
-# put 90Sr as source
-/gun/particle ion
-/gun/ion 38 90
-/gun/energy 0. GeV
-/run/printProgress 500000
-/run/beamOn 100000000
+# /beta/det/planeDist0 0 cm
+# /beta/det/planeDist1 0 cm
+# /beta/det/planeDist2 0 cm
+# /beta/det/Reinitialize
+# # set output file name
+# /beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_noCollimator_noAbsorber_zeroDist
+# # put 90Sr as source
+# /gun/particle ion
+# /gun/ion 38 90
+# /gun/energy 0. GeV
+# /run/printProgress 500000
+# /run/beamOn 100000000
+
+# /beta/det/pcbSubThick 0 mm 
+# /beta/det/Reinitialize
+# /beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_noCollimator_noAbsorber_zeroDist_noPCB
+# /run/beamOn 100000000
+
+# /beta/det/collThick 1 cm
+# /beta/det/collHoleDiam 1 mm
+# /beta/det/Reinitialize
+# /beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_noAbsorber_zeroDist_noPCB_1mmCollHole
+# /run/beamOn 100000000
+
+/beta/det/collThick 1 cm
+/beta/det/collHoleDiam 1 mm
+
+/beta/det/planeDist0 1 cm
+/beta/det/planeDist1 0.5 cm
+/beta/det/planeDist2 0.5 cm
+/beta/det/Reinitialize
+/beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_noAbsorber_1mmCollHole_dist_10_5_5
+/run/beamOn 200000000
+
+/beta/det/planeDist0 1 cm
+/beta/det/planeDist1 1 cm
+/beta/det/planeDist2 1 cm
+/beta/det/Reinitialize
+/beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_noAbsorber_1mmCollHole_dist_10_10_10
+/run/beamOn 200000000
+
+
+/beta/det/absThick 1 mm
+
+/beta/det/planeDist0 1 cm
+/beta/det/planeDist1 0.5 cm
+/beta/det/planeDist2 0.5 cm
+/beta/det/Reinitialize
+/beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_1mmAbsorber_1mmCollHole_dist_10_5_5
+/run/beamOn 200000000
+
+/beta/det/planeDist0 1 cm
+/beta/det/planeDist1 1 cm
+/beta/det/planeDist2 1 cm
+/beta/det/Reinitialize
+/beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_1mmAbsorber_1mmCollHole_dist_10_10_10
+/run/beamOn 200000000
+
+
+/beta/det/absThick 0 mm
+/beta/det/pcbSubThick 0 mm 
+
+/beta/det/planeDist0 1 cm
+/beta/det/planeDist1 0.5 cm
+/beta/det/planeDist2 0.5 cm
+/beta/det/Reinitialize
+/beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_noAbsorber_1mmCollHole_dist_10_5_5_noPCB
+/run/beamOn 200000000
+
+/beta/det/planeDist0 1 cm
+/beta/det/planeDist1 1 cm
+/beta/det/planeDist2 1 cm
+/beta/det/Reinitialize
+/beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_noAbsorber_1mmCollHole_dist_10_10_10_noPCB
+/run/beamOn 200000000
+
+
+/beta/det/absThick 1 mm
+
+/beta/det/planeDist0 1 cm
+/beta/det/planeDist1 0.5 cm
+/beta/det/planeDist2 0.5 cm
+/beta/det/Reinitialize
+/beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_1mmAbsorber_1mmCollHole_dist_10_5_5_noPCB
+/run/beamOn 200000000
+
+/beta/det/planeDist0 1 cm
+/beta/det/planeDist1 1 cm
+/beta/det/planeDist2 1 cm
+/beta/det/Reinitialize
+/beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_1mmAbsorber_1mmCollHole_dist_10_10_10_noPCB
+/run/beamOn 200000000
+
+
+
+
+
+
+
 #
 # muons can be used to see the MIP signal on sensors
 # /beta/histo/outFileName /home/vigna/data/betaSimulationTests/betaSimulationMuonRun
