@@ -61,20 +61,20 @@
 /run/initialize
 #
 # set output file name
-/beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_noCollimator_noAbsorber_nTrack
-# put 90Sr as source
-/gun/particle ion
-/gun/ion 38 90
-/gun/energy 0. GeV
-/run/printProgress 500000
-/run/beamOn 100000000
+# /beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_noCollimator_noAbsorber_nTrack
+# # put 90Sr as source
+# /gun/particle ion
+# /gun/ion 38 90
+# /gun/energy 0. GeV
+# /run/printProgress 500000
+# /run/beamOn 100000000
 #
 # muons can be used to see the MIP signal on sensors
-# /beta/histo/outFileName /home/vigna/data/betaSimulationTests/betaSimulationMuonRun
-# /gun/particle mu-
-# /gun/energy 100 GeV
-# /run/printProgress 10000
-# /run/beamOn 100000
+/beta/histo/outFileName /home/vigna/data/betaSimulationTests/betaSimulationMuonRun
+/gun/particle mu-
+/gun/energy 100 GeV
+/run/printProgress 10000
+/run/beamOn 100000
 
 
 # =============================== produce data for comparison with bichsel theory ==============================

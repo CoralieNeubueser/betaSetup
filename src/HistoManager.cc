@@ -13,12 +13,16 @@ HistoManager::HistoManager()
 {
   fOutFileName = "beta";
   fMessenger = new HistoManagerMessenger(this);
+
+  trackNumVec = new std::vector<G4int>*[DetectorConstruction::nPlanes];
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 HistoManager::~HistoManager()
-{}
+{
+  delete[] trackNumVec;
+}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -100,6 +104,8 @@ void HistoManager::Book()
     analysisManager->CreateNtupleDColumn("y"); // column Id = 4
     analysisManager->CreateNtupleDColumn("z"); // column Id = 5
     analysisManager->CreateNtupleIColumn("nTracks"); // column Id = 6
+    trackNumVec[i] = new std::vector<G4int>;
+    analysisManager->CreateNtupleIColumn("trackNumVec", *trackNumVec[i]); // column Id = 7
     analysisManager->FinishNtuple();
   }
 

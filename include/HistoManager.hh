@@ -23,11 +23,14 @@ public:
   void Save();
 
   void SetOutFileName(G4String name) {fOutFileName = name;};
+
+  std::vector<G4int>* GetTrackNumVec(G4int i) {return trackNumVec[i];};
   
 private:
   G4bool fFactoryOn;    
   G4String fOutFileName;
   HistoManagerMessenger* fMessenger;
+  std::vector<G4int>** trackNumVec;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
