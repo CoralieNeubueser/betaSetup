@@ -78,6 +78,7 @@ G4bool SiDetSD::ProcessHits(G4Step* aStep, G4TouchableHistory*)
     newHitSiDet->SetTrackID(track->GetTrackID());
     newHitSiDet->SetEdep(edep);
     newHitSiDet->SetPos(aStep->GetPreStepPoint()->GetPosition());
+    newHitSiDet->SetPDGencoding(track->GetParticleDefinition()->GetPDGEncoding());
     fSiDetHC->insert( newHitSiDet );
   }
   
@@ -155,6 +156,7 @@ void SiDetSD::EndOfEvent(G4HCofThisEvent* hce)
       
       if(foundTrk == false){ // new track, push back stuff
 	trkIDvec->push_back(trkID);
+	partVec->push_back( (*fSiDetHC)[i]->GetPDGencoding() );
 	edepVec->push_back(edep);
 	xVec->push_back( (*fSiDetHC)[i]->GetPos()[0] * edep );
 	yVec->push_back( (*fSiDetHC)[i]->GetPos()[1] * edep );

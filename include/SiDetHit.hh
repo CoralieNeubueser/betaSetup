@@ -38,12 +38,14 @@ public:
   void SetTrackID  (G4int track)      { fTrackID = track; };
   void SetEdep     (G4double de)      { fEdep = de; };
   void SetPos      (G4ThreeVector xyz){ fPos = xyz; };
+  void SetPDGencoding      (G4int enc){ fPDGencoding = enc; };
 
   // Get methods
   G4int GetEvtID() const       { return fEvtID; };
   G4int GetTrackID() const     { return fTrackID; };
   G4double GetEdep() const     { return fEdep; };
   G4ThreeVector GetPos() const { return fPos; };
+  G4int GetPDGencoding() const { return fPDGencoding; };
 
 private:
   
@@ -51,6 +53,8 @@ private:
   G4int         fTrackID;
   G4double      fEdep;
   G4ThreeVector fPos;
+  G4int fPDGencoding;
+
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
