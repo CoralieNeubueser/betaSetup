@@ -26,6 +26,7 @@ public:
 
   std::vector<G4int>* GetTrackNumVec(G4int i) {return _trackNumVec[i];};
   std::vector<G4int>* GetParticleVec(G4int i) {return _particleVec[i];};
+  std::vector<G4double>* GetEkinVec(G4int i) {return _ekinVec[i];};
   std::vector<G4double>* GetEdepVec(G4int i) {return _edepVec[i];};
   std::vector<G4double>* GetXVec(G4int i) {return _xVec[i];};
   std::vector<G4double>* GetYVec(G4int i) {return _yVec[i];};
@@ -39,6 +40,7 @@ private:
   // vectors to be used in the trees
   std::vector<G4int>** _trackNumVec; 
   std::vector<G4int>** _particleVec; 
+  std::vector<G4double>** _ekinVec;
   std::vector<G4double>** _edepVec;
   std::vector<G4double>** _xVec;
   std::vector<G4double>** _yVec;

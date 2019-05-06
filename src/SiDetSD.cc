@@ -79,6 +79,7 @@ G4bool SiDetSD::ProcessHits(G4Step* aStep, G4TouchableHistory*)
     newHitSiDet->SetEdep(edep);
     newHitSiDet->SetPos(aStep->GetPreStepPoint()->GetPosition());
     newHitSiDet->SetPDGencoding(track->GetParticleDefinition()->GetPDGEncoding());
+    newHitSiDet->SetEkin(track->GetKineticEnergy());
     fSiDetHC->insert( newHitSiDet );
   }
   
@@ -127,6 +128,8 @@ void SiDetSD::EndOfEvent(G4HCofThisEvent* hce)
 
   std::vector<G4int>* partVec = _histManager->GetParticleVec(_planeNum);
   partVec->clear();
+  std::vector<G4double>* ekinVec = _histManager->GetEkinVec(_planeNum);
+  ekinVec->clear();
   std::vector<G4double>* edepVec = _histManager->GetEdepVec(_planeNum);
   edepVec->clear();
   std::vector<G4double>* xVec = _histManager->GetXVec(_planeNum);
@@ -157,6 +160,7 @@ void SiDetSD::EndOfEvent(G4HCofThisEvent* hce)
       if(foundTrk == false){ // new track, push back stuff
 	trkIDvec->push_back(trkID);
 	partVec->push_back( (*fSiDetHC)[i]->GetPDGencoding() );
+	ekinVec->push_back( (*fSiDetHC)[i]->GetEkin() ); // the first hit found in the HC is used for the kinetic energy
 	edepVec->push_back(edep);
 	xVec->push_back( (*fSiDetHC)[i]->GetPos()[0] * edep );
 	yVec->push_back( (*fSiDetHC)[i]->GetPos()[1] * edep );

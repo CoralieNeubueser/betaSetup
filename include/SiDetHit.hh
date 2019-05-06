@@ -39,6 +39,7 @@ public:
   void SetEdep     (G4double de)      { fEdep = de; };
   void SetPos      (G4ThreeVector xyz){ fPos = xyz; };
   void SetPDGencoding      (G4int enc){ fPDGencoding = enc; };
+  void SetEkin     (G4double de)      { fEkin = de; };
 
   // Get methods
   G4int GetEvtID() const       { return fEvtID; };
@@ -46,6 +47,7 @@ public:
   G4double GetEdep() const     { return fEdep; };
   G4ThreeVector GetPos() const { return fPos; };
   G4int GetPDGencoding() const { return fPDGencoding; };
+  G4double GetEkin() const     { return fEkin; };
 
 private:
   
@@ -54,6 +56,7 @@ private:
   G4double      fEdep;
   G4ThreeVector fPos;
   G4int fPDGencoding;
+  G4double      fEkin;
 
 };
 
