@@ -123,21 +123,45 @@ void SiDetSD::EndOfEvent(G4HCofThisEvent* hce)
   trkIDvec->clear();
   G4int trkID = -1;
   bool foundTrk = false;
+
+  std::vector<G4int>* partVec = _histManager->GetParticleVec(_planeNum);
+  partVec->clear();
+  std::vector<G4double>* edepVec = _histManager->GetEdepVec(_planeNum);
+  edepVec->clear();
+  std::vector<G4double>* xVec = _histManager->GetXVec(_planeNum);
+  xVec->clear();
+  std::vector<G4double>* yVec = _histManager->GetYVec(_planeNum);
+  yVec->clear();
+  std::vector<G4double>* zVec = _histManager->GetZVec(_planeNum);
+  zVec->clear();
   
   G4int nofHits = fSiDetHC->entries();
   if(nofHits > 0){
     for(G4int i= 0; i < nofHits; ++i){
-
+      edep = (*fSiDetHC)[i]->GetEdep();
+      
       trkID = (*fSiDetHC)[i]->GetTrackID();
       foundTrk = false;
       for(G4int itrk = 0; itrk < (G4int) trkIDvec->size(); itrk++) // check if the track is already in the vector
-	if(trkID == trkIDvec->at(itrk))
+	if(trkID == trkIDvec->at(itrk)){
 	  foundTrk = true;
+
+	  // if track is there, add up quantities
+	  edepVec->at(itrk) += edep;
+	  xVec->at(itrk) += (*fSiDetHC)[i]->GetPos()[0] * edep;
+	  yVec->at(itrk) += (*fSiDetHC)[i]->GetPos()[1] * edep;
+	  zVec->at(itrk) += (*fSiDetHC)[i]->GetPos()[2] * edep;
+	}
       
-      if(foundTrk == false)
+      if(foundTrk == false){ // new track, push back stuff
 	trkIDvec->push_back(trkID);
+	edepVec->push_back(edep);
+	xVec->push_back( (*fSiDetHC)[i]->GetPos()[0] * edep );
+	yVec->push_back( (*fSiDetHC)[i]->GetPos()[1] * edep );
+	zVec->push_back( (*fSiDetHC)[i]->GetPos()[2] * edep );
+      }
 	
-      edep = (*fSiDetHC)[i]->GetEdep();
+
       // calculate quantities for the tree
       Etot += edep;
       x += (*fSiDetHC)[i]->GetPos()[0] * edep;
@@ -147,6 +171,13 @@ void SiDetSD::EndOfEvent(G4HCofThisEvent* hce)
     x /= Etot;
     y /= Etot;
     z /= Etot;
+
+    for(G4int itrk = 0; itrk < (G4int) trkIDvec->size(); itrk++){
+      xVec->at(itrk) /= edepVec->at(itrk);
+      yVec->at(itrk) /= edepVec->at(itrk);
+      zVec->at(itrk) /= edepVec->at(itrk);
+    }
+
     // fill histograms
     analysisManager->FillH1(_planeNum, Etot);
     analysisManager->FillH2(_planeNum, x, y);
