@@ -87,76 +87,112 @@
 /beta/det/collThick 1 cm
 /beta/det/collHoleDiam 1 mm
 
-/beta/det/planeDist0 1 cm
+# /beta/det/planeDist0 1 cm
+# /beta/det/planeDist1 0.5 cm
+# /beta/det/planeDist2 0.5 cm
+# /beta/det/Reinitialize
+# /beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_noAbsorber_1mmCollHole_dist_10_5_5
+# /run/beamOn 200000000
+
+# /beta/det/planeDist0 1 cm
+# /beta/det/planeDist1 1 cm
+# /beta/det/planeDist2 1 cm
+# /beta/det/Reinitialize
+# /beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_noAbsorber_1mmCollHole_dist_10_10_10
+# /run/beamOn 200000000
+
+/beta/det/planeDist0 0.5 cm
 /beta/det/planeDist1 0.5 cm
 /beta/det/planeDist2 0.5 cm
 /beta/det/Reinitialize
-/beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_noAbsorber_1mmCollHole_dist_10_5_5
-/run/beamOn 200000000
-
-/beta/det/planeDist0 1 cm
-/beta/det/planeDist1 1 cm
-/beta/det/planeDist2 1 cm
-/beta/det/Reinitialize
-/beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_noAbsorber_1mmCollHole_dist_10_10_10
+/beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_noAbsorber_1mmCollHole_dist_5_5_5
 /run/beamOn 200000000
 
 
 /beta/det/absThick 1 mm
 
-/beta/det/planeDist0 1 cm
+# /beta/det/planeDist0 1 cm
+# /beta/det/planeDist1 0.5 cm
+# /beta/det/planeDist2 0.5 cm
+# /beta/det/Reinitialize
+# /beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_1mmAbsorber_1mmCollHole_dist_10_5_5
+# /run/beamOn 200000000
+
+# /beta/det/planeDist0 1 cm
+# /beta/det/planeDist1 1 cm
+# /beta/det/planeDist2 1 cm
+# /beta/det/Reinitialize
+# /beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_1mmAbsorber_1mmCollHole_dist_10_10_10
+# /run/beamOn 200000000
+
+/beta/det/planeDist0 0.5 cm
 /beta/det/planeDist1 0.5 cm
 /beta/det/planeDist2 0.5 cm
 /beta/det/Reinitialize
-/beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_1mmAbsorber_1mmCollHole_dist_10_5_5
+/beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_1mmAbsorber_1mmCollHole_dist_5_5_5
 /run/beamOn 200000000
 
-/beta/det/planeDist0 1 cm
-/beta/det/planeDist1 1 cm
-/beta/det/planeDist2 1 cm
+
+/beta/det/absThick 0.5 mm
+
 /beta/det/Reinitialize
-/beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_1mmAbsorber_1mmCollHole_dist_10_10_10
+/beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_500umAbsorber_1mmCollHole_dist_5_5_5
+/run/beamOn 200000000
+
+/beta/det/absThick 0.1 mm
+
+/beta/det/Reinitialize
+/beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_100umAbsorber_1mmCollHole_dist_5_5_5
 /run/beamOn 200000000
 
 
 /beta/det/absThick 0 mm
 /beta/det/pcbSubThick 0 mm 
 
-/beta/det/planeDist0 1 cm
+# /beta/det/planeDist0 1 cm
+# /beta/det/planeDist1 0.5 cm
+# /beta/det/planeDist2 0.5 cm
+# /beta/det/Reinitialize
+# /beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_noAbsorber_1mmCollHole_dist_10_5_5_noPCB
+# /run/beamOn 200000000
+
+# /beta/det/planeDist0 1 cm
+# /beta/det/planeDist1 1 cm
+# /beta/det/planeDist2 1 cm
+# /beta/det/Reinitialize
+# /beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_noAbsorber_1mmCollHole_dist_10_10_10_noPCB
+# /run/beamOn 200000000
+
+/beta/det/planeDist0 0.5 cm
 /beta/det/planeDist1 0.5 cm
 /beta/det/planeDist2 0.5 cm
 /beta/det/Reinitialize
-/beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_noAbsorber_1mmCollHole_dist_10_5_5_noPCB
-/run/beamOn 200000000
-
-/beta/det/planeDist0 1 cm
-/beta/det/planeDist1 1 cm
-/beta/det/planeDist2 1 cm
-/beta/det/Reinitialize
-/beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_noAbsorber_1mmCollHole_dist_10_10_10_noPCB
+/beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_noAbsorber_1mmCollHole_dist_5_5_5_noPCB
 /run/beamOn 200000000
 
 
 /beta/det/absThick 1 mm
 
-/beta/det/planeDist0 1 cm
+# /beta/det/planeDist0 1 cm
+# /beta/det/planeDist1 0.5 cm
+# /beta/det/planeDist2 0.5 cm
+# /beta/det/Reinitialize
+# /beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_1mmAbsorber_1mmCollHole_dist_10_5_5_noPCB
+# /run/beamOn 200000000
+
+# /beta/det/planeDist0 1 cm
+# /beta/det/planeDist1 1 cm
+# /beta/det/planeDist2 1 cm
+# /beta/det/Reinitialize
+# /beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_1mmAbsorber_1mmCollHole_dist_10_10_10_noPCB
+# /run/beamOn 200000000
+
+/beta/det/planeDist0 0.5 cm
 /beta/det/planeDist1 0.5 cm
 /beta/det/planeDist2 0.5 cm
 /beta/det/Reinitialize
-/beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_1mmAbsorber_1mmCollHole_dist_10_5_5_noPCB
+/beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_1mmAbsorber_1mmCollHole_dist_5_5_5_noPCB
 /run/beamOn 200000000
-
-/beta/det/planeDist0 1 cm
-/beta/det/planeDist1 1 cm
-/beta/det/planeDist2 1 cm
-/beta/det/Reinitialize
-/beta/histo/outFileName /home/vigna/data/betaSimulation/betaSimulation_1mmAbsorber_1mmCollHole_dist_10_10_10_noPCB
-/run/beamOn 200000000
-
-
-
-
-
 
 
 #
