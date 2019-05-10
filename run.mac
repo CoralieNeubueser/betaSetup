@@ -76,18 +76,18 @@
 /run/printProgress 10000
 /run/beamOn 100000
 
-/beta/det/planeDist0 0 cm
-/beta/det/planeDist1 0 cm
-/beta/det/planeDist2 0 cm
-/beta/det/Reinitialize
-# set output file name
-/beta/histo/outFileName /home/vigna/data/betaSimulationTests/betaSimulation_noCollimator_noAbsorber_zeroDistVec
-# put 90Sr as source
-/gun/particle ion
-/gun/ion 38 90
-/gun/energy 0. GeV
-/run/printProgress 500000
-/run/beamOn 100000000
+# /beta/det/planeDist0 0 cm
+# /beta/det/planeDist1 0 cm
+# /beta/det/planeDist2 0 cm
+# /beta/det/Reinitialize
+# # set output file name
+# /beta/histo/outFileName /home/vigna/data/betaSimulationTests/betaSimulation_noCollimator_noAbsorber_zeroDistVec
+# # put 90Sr as source
+# /gun/particle ion
+# /gun/ion 38 90
+# /gun/energy 0. GeV
+# /run/printProgress 500000
+# /run/beamOn 100000000
 
 
 # =============================== produce data for comparison with bichsel theory ==============================

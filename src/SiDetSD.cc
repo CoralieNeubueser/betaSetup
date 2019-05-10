@@ -80,6 +80,7 @@ G4bool SiDetSD::ProcessHits(G4Step* aStep, G4TouchableHistory*)
     newHitSiDet->SetPos(aStep->GetPreStepPoint()->GetPosition());
     newHitSiDet->SetPDGencoding(track->GetParticleDefinition()->GetPDGEncoding());
     newHitSiDet->SetEkin(track->GetKineticEnergy());
+    newHitSiDet->SetTime(track->GetGlobalTime());
     fSiDetHC->insert( newHitSiDet );
   }
   
@@ -119,6 +120,7 @@ void SiDetSD::EndOfEvent(G4HCofThisEvent* hce)
   G4double x = 0;
   G4double y = 0;
   G4double z = 0;
+  G4double t = 0;
   G4int eID = -1;
 
   std::vector<G4int>* trkIDvec = _histManager->GetTrackNumVec(_planeNum);
@@ -173,11 +175,13 @@ void SiDetSD::EndOfEvent(G4HCofThisEvent* hce)
       x += (*fSiDetHC)[i]->GetPos()[0] * edep;
       y += (*fSiDetHC)[i]->GetPos()[1] * edep;
       z += (*fSiDetHC)[i]->GetPos()[2] * edep;
+      t += (*fSiDetHC)[i]->GetTime();
     }
     x /= Etot;
     y /= Etot;
     z /= Etot;
-
+    t /= nofHits;
+    
     for(G4int itrk = 0; itrk < (G4int) trkIDvec->size(); itrk++){
       xVec->at(itrk) /= edepVec->at(itrk);
       yVec->at(itrk) /= edepVec->at(itrk);
@@ -194,6 +198,7 @@ void SiDetSD::EndOfEvent(G4HCofThisEvent* hce)
     x = -999;
     y = -999;
     z = -999;
+    t = -999;
     // event ID from event manager
     const G4Event* evt = G4RunManager::GetRunManager()->GetCurrentEvent();
     eID = evt->GetEventID();
@@ -206,7 +211,8 @@ void SiDetSD::EndOfEvent(G4HCofThisEvent* hce)
   analysisManager->FillNtupleDColumn(_planeNum, 3, x);
   analysisManager->FillNtupleDColumn(_planeNum, 4, y);
   analysisManager->FillNtupleDColumn(_planeNum, 5, z);
-  analysisManager->FillNtupleIColumn(_planeNum, 6, trkIDvec->size());
+  analysisManager->FillNtupleDColumn(_planeNum, 6, t);
+  analysisManager->FillNtupleIColumn(_planeNum, 7, trkIDvec->size());
   analysisManager->AddNtupleRow(_planeNum);  
 
   nofHits = fSpectrumHC->entries();
