@@ -21,6 +21,7 @@ HistoManager::HistoManager()
   _xVec = new std::vector<G4double>*[DetectorConstruction::nPlanes];
   _yVec = new std::vector<G4double>*[DetectorConstruction::nPlanes];
   _zVec = new std::vector<G4double>*[DetectorConstruction::nPlanes];
+  _tVec = new std::vector<G4double>*[DetectorConstruction::nPlanes];
 
 }
 
@@ -35,6 +36,7 @@ HistoManager::~HistoManager()
   delete[] _xVec;
   delete[] _yVec;
   delete[] _zVec;
+  delete[] _tVec;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -132,6 +134,8 @@ void HistoManager::Book()
     analysisManager->CreateNtupleDColumn("yVec", *_yVec[i]); // column Id = 13
     _zVec[i] = new std::vector<G4double>;
     analysisManager->CreateNtupleDColumn("zVec", *_zVec[i]); // column Id = 14
+    _tVec[i] = new std::vector<G4double>;
+    analysisManager->CreateNtupleDColumn("tVec", *_tVec[i]); // column Id = 15
     analysisManager->FinishNtuple();
   }
 

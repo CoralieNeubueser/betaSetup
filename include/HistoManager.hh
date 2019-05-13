@@ -31,6 +31,7 @@ public:
   std::vector<G4double>* GetXVec(G4int i) {return _xVec[i];};
   std::vector<G4double>* GetYVec(G4int i) {return _yVec[i];};
   std::vector<G4double>* GetZVec(G4int i) {return _zVec[i];};
+  std::vector<G4double>* GetTVec(G4int i) {return _tVec[i];};
   
 private:
   G4bool fFactoryOn;    
@@ -45,6 +46,7 @@ private:
   std::vector<G4double>** _xVec;
   std::vector<G4double>** _yVec;
   std::vector<G4double>** _zVec;
+  std::vector<G4double>** _tVec;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

@@ -140,6 +140,9 @@ void SiDetSD::EndOfEvent(G4HCofThisEvent* hce)
   yVec->clear();
   std::vector<G4double>* zVec = _histManager->GetZVec(_planeNum);
   zVec->clear();
+  std::vector<G4double>* tVec = _histManager->GetTVec(_planeNum);
+  tVec->clear();
+  std::vector<G4int> countHitVec; // vector to count how many hits each track has, to have average time
   
   G4int nofHits = fSiDetHC->entries();
   if(nofHits > 0){
@@ -157,6 +160,8 @@ void SiDetSD::EndOfEvent(G4HCofThisEvent* hce)
 	  xVec->at(itrk) += (*fSiDetHC)[i]->GetPos()[0] * edep;
 	  yVec->at(itrk) += (*fSiDetHC)[i]->GetPos()[1] * edep;
 	  zVec->at(itrk) += (*fSiDetHC)[i]->GetPos()[2] * edep;
+	  tVec->at(itrk) += (*fSiDetHC)[i]->GetTime();
+	  countHitVec.at(itrk) += 1;
 	}
       
       if(foundTrk == false){ // new track, push back stuff
@@ -167,6 +172,8 @@ void SiDetSD::EndOfEvent(G4HCofThisEvent* hce)
 	xVec->push_back( (*fSiDetHC)[i]->GetPos()[0] * edep );
 	yVec->push_back( (*fSiDetHC)[i]->GetPos()[1] * edep );
 	zVec->push_back( (*fSiDetHC)[i]->GetPos()[2] * edep );
+	tVec->push_back( (*fSiDetHC)[i]->GetTime() );
+	countHitVec.push_back(1);
       }
 	
 
@@ -186,6 +193,7 @@ void SiDetSD::EndOfEvent(G4HCofThisEvent* hce)
       xVec->at(itrk) /= edepVec->at(itrk);
       yVec->at(itrk) /= edepVec->at(itrk);
       zVec->at(itrk) /= edepVec->at(itrk);
+      tVec->at(itrk) /= countHitVec.at(itrk);
     }
 
     // fill histograms
