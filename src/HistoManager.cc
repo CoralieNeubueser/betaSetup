@@ -13,12 +13,31 @@ HistoManager::HistoManager()
 {
   fOutFileName = "beta";
   fMessenger = new HistoManagerMessenger(this);
+
+  _trackNumVec = new std::vector<G4int>*[DetectorConstruction::nPlanes];
+  _particleVec = new std::vector<G4int>*[DetectorConstruction::nPlanes];
+  _ekinVec = new std::vector<G4double>*[DetectorConstruction::nPlanes];
+  _edepVec = new std::vector<G4double>*[DetectorConstruction::nPlanes];
+  _xVec = new std::vector<G4double>*[DetectorConstruction::nPlanes];
+  _yVec = new std::vector<G4double>*[DetectorConstruction::nPlanes];
+  _zVec = new std::vector<G4double>*[DetectorConstruction::nPlanes];
+  _tVec = new std::vector<G4double>*[DetectorConstruction::nPlanes];
+
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 HistoManager::~HistoManager()
-{}
+{
+  delete[] _trackNumVec;
+  delete[] _particleVec;
+  delete[] _ekinVec;
+  delete[] _edepVec;
+  delete[] _xVec;
+  delete[] _yVec;
+  delete[] _zVec;
+  delete[] _tVec;
+}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -99,7 +118,24 @@ void HistoManager::Book()
     analysisManager->CreateNtupleDColumn("x"); // column Id = 3
     analysisManager->CreateNtupleDColumn("y"); // column Id = 4
     analysisManager->CreateNtupleDColumn("z"); // column Id = 5
-    analysisManager->CreateNtupleIColumn("nTracks"); // column Id = 6
+    analysisManager->CreateNtupleDColumn("t"); // column Id = 6
+    analysisManager->CreateNtupleIColumn("nTracks"); // column Id = 7
+    _trackNumVec[i] = new std::vector<G4int>;
+    analysisManager->CreateNtupleIColumn("trackNumVec", *_trackNumVec[i]); // column Id = 8
+    _particleVec[i] = new std::vector<G4int>;
+    analysisManager->CreateNtupleIColumn("particleVec", *_particleVec[i]); // column Id = 9
+    _ekinVec[i] = new std::vector<G4double>;
+    analysisManager->CreateNtupleDColumn("ekinVec", *_ekinVec[i]); // column Id = 10
+    _edepVec[i] = new std::vector<G4double>;
+    analysisManager->CreateNtupleDColumn("edepVec", *_edepVec[i]); // column Id = 11
+    _xVec[i] = new std::vector<G4double>;
+    analysisManager->CreateNtupleDColumn("xVec", *_xVec[i]); // column Id = 12
+    _yVec[i] = new std::vector<G4double>;
+    analysisManager->CreateNtupleDColumn("yVec", *_yVec[i]); // column Id = 13
+    _zVec[i] = new std::vector<G4double>;
+    analysisManager->CreateNtupleDColumn("zVec", *_zVec[i]); // column Id = 14
+    _tVec[i] = new std::vector<G4double>;
+    analysisManager->CreateNtupleDColumn("tVec", *_tVec[i]); // column Id = 15
     analysisManager->FinishNtuple();
   }
 
