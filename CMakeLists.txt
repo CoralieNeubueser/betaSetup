@@ -44,7 +44,7 @@ target_link_libraries(betaSetup ${Geant4_LIBRARIES} ${HBOOK_LIBRARIES})
 # relies on these scripts being in the current working directory.
 #
 set(betaSetup_SCRIPTS
-    betaSetup.in run.mac init_vis.mac vis.mac
+    betaSetup.in run.mac init_vis.mac vis.mac timeProfile.txt
   )
 
 foreach(_script ${betaSetup_SCRIPTS})
