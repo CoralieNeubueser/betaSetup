@@ -162,12 +162,16 @@ void SiDetSD::EndOfEvent(G4HCofThisEvent* hce)
 	  zVec->at(itrk) += (*fSiDetHC)[i]->GetPos()[2] * edep;
 	  tVec->at(itrk) += (*fSiDetHC)[i]->GetTime();
 	  countHitVec.at(itrk) += 1;
+
+	  // use the hit with the highest kinetic energy to represent the particle energy
+	  if((*fSiDetHC)[i]->GetEkin() > ekinVec->at(itrk))
+	    ekinVec->at(itrk) = (*fSiDetHC)[i]->GetEkin();
 	}
       
       if(foundTrk == false){ // new track, push back stuff
 	trkIDvec->push_back(trkID);
 	partVec->push_back( (*fSiDetHC)[i]->GetPDGencoding() );
-	ekinVec->push_back( (*fSiDetHC)[i]->GetEkin() ); // the first hit found in the HC is used for the kinetic energy
+	ekinVec->push_back( (*fSiDetHC)[i]->GetEkin() );
 	edepVec->push_back(edep);
 	xVec->push_back( (*fSiDetHC)[i]->GetPos()[0] * edep );
 	yVec->push_back( (*fSiDetHC)[i]->GetPos()[1] * edep );
