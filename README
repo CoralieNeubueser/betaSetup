@@ -54,9 +54,25 @@ Each sensitive detector produces a root tree.
 An entry is created in each tree for each event where at least one hit collection has an entry (including the hit collection used for the spectra).
 The trees need to be ordered and befriended for the analysis.
 TTree::BuildIndex(...), TTree::AddFriend(...)
+The trees contain:
+- Event number, used for synchronization
+- Total energy deposit for the event
+- Number of hits (energy deposits) for the event
+- Position of the energy deposit for the event, weighted with the energy deposit (center of gravity of charge)
+- Time of the energy deposit, averaged
+- Number of tracks in the event
+- Vectors containing almost all these informations, but for each track in the event. Plus the initial kinetic energy of each track entering the Si volume.
+
+The units used in the tree are the default in Geant4, usually: mm, ns, MeV.
+
 NOTE: each tree contains only one branch. To access the leaves containing the relevant information the methods:
 TTree::FindLeaf(...) and TLeaf::SetAddress(...) should be used instead of the TTree::SetBranchAddress(...) method (or at least, i could not make the latter work).
 
+NOTE: the time takes into account the decay of the radioactive nuclei, therefore double precision is not enough to have a precision of ps when over a stored value of years.
+The radioactive particles can be forced to decay within 1 s using:
+/grdm/sourceTimeProfile timeProfile.txt
+in the run.mac file.
+This however seems to cause a memory leak (Geant4 issue, appears also in rdecay02 example) and influences the energy deposit distribution in the Si....
 
 PHYSICS LISTS
 
