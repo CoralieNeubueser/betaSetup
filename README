@@ -61,7 +61,8 @@ The trees contain:
 - Position of the energy deposit for the event, weighted with the energy deposit (center of gravity of charge)
 - Time of the energy deposit, averaged
 - Number of tracks in the event
-- Vectors containing almost all these informations, but for each track in the event. Plus the initial kinetic energy of each track entering the Si volume.
+- Arrays containing almost all these informations, but for each track in the event. Plus the initial kinetic energy of each track entering the Si volume.
+  The lenght of the array is stored in a dedicated variable (arrayName_cont).
 
 The units used in the tree are the default in Geant4, usually: mm, ns, MeV.
 
