@@ -3,6 +3,10 @@ This program was written to simulate in Geant4 a beta setup similar to the one a
 The main aim was to understand whether a hybrid pixel detector could be used to determine the impact position on one of the other silicon planes.
 The trigger scintillator is not part of the simulation.
 
+After setting up the variables for Geant4 to run, the software can be compiled and run.
+If the program is run without arguments, the interactive GUI pops up, showing the setup.
+If a macro file is used as argument, the macro is executed without showing the GUI.
+
 
 GEOMETRY DEFINITION
 
